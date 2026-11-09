@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090b">
+  <meta name="description" content="PLAYFRAME — jogos em foco. Explore, descubra e organize sua coleção de games.">
+  <title>PLAYFRAME — Games, in focus.</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://en.wikipedia.org">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="Playframe início">PLAY<span>FRAME</span><i>®</i></a>
+  <nav aria-label="Navegação principal">
+    <a href="#spotlight">Destaques</a><a href="#library">Biblioteca</a><a href="#discover">Descobrir</a>
+  </nav>
+  <a class="top-link" href="#library">Minha coleção <span>↗</span></a>
+</header>
+
+<main id="top">
+  <section class="spotlight" id="spotlight" aria-label="Jogos em destaque">
+    <div class="spotlight-bg" id="spotlightBg"></div>
+    <div class="spotlight-vignette"></div>
+    <div class="spotlight-content">
+      <div class="kicker"><span class="pulse"></span> PLAYFRAME / SELEÇÃO <span class="kicker-line"></span><span id="slideNumber">01 / 04</span></div>
+      <p class="spotlight-label" id="gameGenre">AÇÃO · MUNDO ABERTO</p>
+      <h1 id="gameTitle">GRAND THEFT<br><em>AUTO VI</em></h1>
+      <p class="spotlight-description" id="gameDescription">Bem-vindo a Leonida. Uma nova história está prestes a começar.</p>
+      <div class="spotlight-actions">
+        <button class="button-light" id="spotlightDetails">Ver detalhes <span>↗</span></button>
+        <a class="button-ghost" href="#library">Minha coleção <span>↓</span></a>
+      </div>
+    </div>
+    <div class="spotlight-footer">
+      <span id="spotlightPublisher">ROCKSTAR GAMES</span>
+      <div class="slide-controls">
+        <button id="previousSlide" aria-label="Jogo anterior">←</button>
+        <div class="slide-progress"><span id="progressBar"></span></div>
+        <button id="nextSlide" aria-label="Próximo jogo">→</button>
+      </div>
+      <span>ROLE PARA EXPLORAR ↓</span>
+    </div>
+    <div class="image-credit" id="imageCredit">IMAGEM ILUSTRATIVA</div>
+  </section>
+
+
+
+  <section class="library wrap" id="library">
+    <div class="section-head">
+      <div><p class="overline">01 / SUA COLEÇÃO</p><h2>SUA <em>BIBLIOTECA.</em></h2></div>
+      <p>Cadastre, pesquise e organize seus jogos em um só lugar.</p>
+    </div>
+    <div class="library-tools">
+      <label class="search"><span>⌕</span><input id="librarySearch" type="search" placeholder="Buscar na coleção..." aria-label="Buscar na coleção"></label>
+      <select id="genreFilter" aria-label="Filtrar por gênero"><option value="Todos">Todos os gêneros</option><option>Ação</option><option>Aventura</option><option>RPG</option><option>Corrida</option><option>Esporte</option><option>Estratégia</option><option>Outro</option></select>
+      <select id="sortLibrary" aria-label="Ordenar coleção"><option value="recent">Adicionados recentemente</option><option value="az">Nome: A–Z</option><option value="za">Nome: Z–A</option><option value="rating">Melhor avaliação</option></select>
+      <button class="add-game" id="openAdd">＋ Adicionar jogo</button>
+    </div>
+    <div class="library-meta"><span id="libraryCount">0 JOGOS</span><span>COLEÇÃO PESSOAL</span></div>
+    <div class="game-grid" id="gameGrid" aria-live="polite"></div>
+    <div class="empty" id="emptyState" hidden><p class="overline">NO GAMES FOUND</p><h3>Sua biblioteca está esperando.</h3><p>Pesquise um jogo ou adicione seu primeiro título.</p></div>
+  </section>
+
+
+  <section class="discover wrap" id="discover">
+    <div class="section-head">
+      <div><p class="overline">05 / SEARCH THE WORLD</p><h2>ENCONTRE SEU<br><em>PRÓXIMO JOGO.</em></h2></div>
+      <p>Busque um título. Consulte um resumo e adicione à sua coleção.</p>
+    </div>
+    <form class="discover-form" id="apiSearchForm">
+      <label class="search discover-search"><span>⌕</span><input id="apiSearchInput" type="search" placeholder="Digite o nome de um jogo..." required aria-label="Pesquisar jogo na Wikipedia"></label>
+      <button type="submit">Pesquisar <span>↗</span></button>
+    </form>
+    <p class="api-message" id="apiMessage" aria-live="polite">Dados e imagens vêm de artigos da Wikipedia. A disponibilidade varia por título.</p>
+    <div class="api-results" id="apiResults"></div>
+  </section>
+
+  <section class="closing wrap">
+    <p class="overline">PLAYFRAME</p>
+    <h2>JOGUE. <em>DESCUBRA.</em></h2>
+    <a class="under-link" href="#top">Voltar ao topo ↑</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <a class="brand" href="#top">PLAY<span>FRAME</span><i>®</i></a>
+  <p>Um catálogo independente de jogos.</p>
+  <span>© 2026 PLAYFRAME</span>
+</footer>
+
+<dialog id="gameDialog" class="dialog">
+  <form id="gameForm" method="dialog">
+    <div class="dialog-head"><p class="overline" id="formMode">NEW GAME / YOUR LIBRARY</p><button type="button" class="close" id="closeForm" aria-label="Fechar">×</button></div>
+    <h2 id="formTitle">Add a <em>game.</em></h2>
+    <input type="hidden" id="gameId">
+    <div class="fields">
+      <label class="field wide">Nome do jogo<input id="inputName" maxlength="90" required placeholder="Ex.: Red Dead Redemption 2"></label>
+      <label class="field">Gênero<select id="inputGenre"><option>Ação</option><option>Aventura</option><option>RPG</option><option>Corrida</option><option>Esporte</option><option>Estratégia</option><option>Outro</option></select></label>
+      <label class="field">Status<select id="inputStatus"><option>Quero jogar</option><option>Jogando</option><option>Concluído</option><option>Pausado</option></select></label>
+      <label class="field">Avaliação (0–10)<input id="inputRating" type="number" min="0" max="10" step="0.5" value="0"></label>
+      <label class="field">Ano de lançamento<input id="inputYear" type="number" min="1970" max="2035" placeholder="2026"></label>
+      <label class="field wide">URL da imagem<input id="inputImage" type="url" placeholder="https://..."></label>
+      <label class="field wide">Descrição<textarea id="inputDescription" rows="4" maxlength="600" required placeholder="Resumo objetivo do jogo"></textarea></label>
+      <label class="field">Desenvolvedora<input id="inputDeveloper" maxlength="100" placeholder="Estúdio"></label>
+      <label class="field">Publicadora<input id="inputPublisher" maxlength="100" placeholder="Empresa"></label>
+      <label class="field wide">Plataformas<input id="inputPlatforms" maxlength="180" placeholder="PC · PlayStation · Xbox"></label>
+      <label class="field wide">Fonte (opcional)<input id="inputSource" type="url" placeholder="https://..."></label>
+    </div>
+    <p class="form-error" id="formError" aria-live="polite"></p>
+    <div class="dialog-actions"><button type="button" class="cancel" id="cancelForm">Cancelar</button><button class="save" type="submit">Salvar jogo ↗</button></div>
+  </form>
+</dialog>
+
+<dialog id="detailDialog" class="detail-dialog">
+  <button type="button" class="close detail-close" id="closeDetail" aria-label="Fechar">×</button>
+  <div id="detailContent"></div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>
